@@ -18,9 +18,6 @@ terraform {
       region = "us-east-1"
     }
 
-    # Experimental features
-    experiments = [ example ]
-
     # passing metadata to providers 
     provider_meta "my-provider" {
         hello = "world"
