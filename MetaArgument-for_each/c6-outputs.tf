@@ -14,5 +14,5 @@ output "instance_publicdns1" {
 
 # EC2 Instance Public DNS with TOMAP 
 output "instance_publicdns2" {
-  value = tomap({for az, instance in aws_instance.myec2vm: az => instance.public_dns})
+  value = tomap({for az, instance in aws_instance.myec2vm: az => instance.public_ip})
 }
