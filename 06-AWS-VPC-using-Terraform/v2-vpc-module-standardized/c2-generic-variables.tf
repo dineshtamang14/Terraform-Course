@@ -17,5 +17,5 @@ variable "environment" {
 variable "business_division" {
   description = "Business Division in the large organization"
   type = string
-  default = "HR"
+  default = "SAP"
 }
