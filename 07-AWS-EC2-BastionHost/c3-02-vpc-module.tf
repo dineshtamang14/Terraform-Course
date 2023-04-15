@@ -13,7 +13,7 @@ module "vpc" {
   # version = "~> 4.0"
 
   # VPC Basic Details
-  name = "${local.name}-${var.vpc_name}"
+  name = "${local.eks_cluster_name}"
   cidr = "${var.vpc_cidr_block}"
 
   # azs = "${var.vpc_availability_zones}"
@@ -40,10 +40,14 @@ module "vpc" {
 
   public_subnet_tags = {
     Type = "public-subnets"
+    "kubernetes.io/role/elb" = 1
+    "kubernetes.io/cluster/${local.eks_cluster_name}" = "shared"
   }
 
   private_subnet_tags = {
     Type = "private-subnets"
+    "kubernetes.io/role/internal-elb" = 1
+    "kubernetes.io/cluster/${local.eks_cluster_name}" = "shared"
   }
 
   database_subnet_tags = {
