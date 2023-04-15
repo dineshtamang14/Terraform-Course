@@ -1,3 +1,11 @@
+# AWS Availability Zones Datasource
+data "aws_availability_zones" "available" {
+  state = "available"
+
+  # To exclude certain availability zones
+  # exclude_names = ["us-east-1a", "us-east-1b"]
+}
+
 # Create VPC Terraform Module 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -7,7 +15,10 @@ module "vpc" {
   # VPC Basic Details
   name = "${local.name}-${var.vpc_name}"
   cidr = "${var.vpc_cidr_block}"
-  azs = "${var.vpc_availability_zones}"
+
+  # azs = "${var.vpc_availability_zones}"
+  azs = "${data.aws_availability_zones.available.names}"
+  
   private_subnets = "${var.vpc_private_subnets}"
   public_subnets = "${var.vpc_public_subnets}"
 
