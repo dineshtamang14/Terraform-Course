@@ -4,7 +4,7 @@ resource "aws_eks_node_group" "eks_ng_public" {
 
   node_group_name = "${local.name}-eks-ng-public"
   node_role_arn = "${aws_iam_role.eks_nodegroup_role.arn}"
-  subent_ids = "${module.vpc.public_subnets}"
+  subnet_ids = "${module.vpc.public_subnets}"
 # version = "${var.cluster_version}" # (Optional: Defaults to EKS Cluster Kubernetes version)
 
   ami_type = "AL2_x86_64"
@@ -24,5 +24,18 @@ resource "aws_eks_node_group" "eks_ng_public" {
 
   update_config {
     max_unavailable = 1
+    # max_unavailable_percentage = 50 # Anyone to use
   }
+
+  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling
+  # Otherwise, EKS will not be able to properly delete EC2 Instance and Elastic Network Interface
+    depends_on = [
+      aws_iam_role_policy_attachment.eks-AmazonEKSWorkerNodePolicy,
+      aws_iam_role_policy_attachment.eks-AmazonEKS_CNI_Policy,
+      aws_iam_role_policy_attachment.eks-AmazonEC2ContainerRegistryReadOnly,
+    ]
+
+    tags = {
+      Name = "Public-Node-Group"
+    }
 }
