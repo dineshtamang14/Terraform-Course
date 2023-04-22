@@ -1,6 +1,6 @@
 # AWS Availability Zones Datasource
 data "aws_availability_zones" "available" {
-  state = "available"
+  # state = "available"
 
   # To exclude certain availability zones
   # exclude_names = ["us-east-1a", "us-east-1b"]
@@ -18,9 +18,9 @@ module "vpc" {
 
   # azs = "${var.vpc_availability_zones}"
   azs = "${data.aws_availability_zones.available.names}"
-  
-  private_subnets = "${var.vpc_private_subnets}"
   public_subnets = "${var.vpc_public_subnets}"
+  private_subnets = "${var.vpc_private_subnets}"
+  map_public_ip_on_launch = true
 
   # Database Subnets
   database_subnets = "${var.vpc_database_subnets}"
@@ -38,6 +38,10 @@ module "vpc" {
   enable_dns_hostnames = true
   enable_dns_support = true
 
+  # Regular Tags
+  tags = "${local.common_tags}"
+  vpc_tags = "${local.common_tags}"
+  
   public_subnet_tags = {
     Type = "public-subnets"
     "kubernetes.io/role/elb" = 1
@@ -53,8 +57,4 @@ module "vpc" {
   database_subnet_tags = {
     Type = "database-subnets"
   }
-
-  # Regular Tags
-  tags = "${local.common_tags}"
-  vpc_tags = "${local.common_tags}"
 }

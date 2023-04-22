@@ -1,4 +1,4 @@
-## Step-14: Configure kubeconfig for kubectl
+## Configure kubeconfig for kubectl
 ```t
 # Configure kubeconfig for kubectl
 aws eks --region <region-code> update-kubeconfig --name <cluster_name>
