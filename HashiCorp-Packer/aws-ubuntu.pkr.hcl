@@ -10,26 +10,32 @@ packer {
 
 // builder configurations
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "my-first-packer-image"
+  ami_name      = "pod-talk-app"
   instance_type = "t2.micro"
   region        = "us-east-1"
-  source_ami    = "ami-007855ac798b5175e"
+  source_ami    = "ami-0aa2b7722dc1b5612"
   ssh_username  = "ubuntu"
 }
 
 build {
-  name   = "my-first-build"
+  name    = "my-first-build"
   sources = ["source.amazon-ebs.ubuntu"]
 
   // provisioner configuration
   provisioner "shell" {
+    script = "userdata/setup.sh"
+  }
+
+  provisioner "file" {
+    source      = "userdata/app.zip"
+    destination = "/tmp/"
+  }
+
+  provisioner "shell" {
     inline = [
-      "sudo apt update && sudo apt upgrade -y",
-      "sudo apt install nginx vim nano fish nmap wget -y",
-      "sudo systemctl enable nginx",
-      "sudo systemctl start nginx",
-      "sudo ufw allow proto tcp from any to port 22,80,443",
-      "echo 'y' | sudo ufw enable"
+      "sudo rm -rf /var/www/html/*"
+      "sudo unzip /tmp/app.zip -d /var/www/html",
+      "sudo mv /var/www/html/templatemo_584_pod_talk/* /var/www/html"
     ]
   }
 
