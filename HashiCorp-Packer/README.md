@@ -18,3 +18,13 @@ packer validate .
 ```sh
 packer build aws-ubuntu.pkr.hcl
 ```
+
+### Passing variables value during a build
+```sh
+packer build -var 'project=webserver' -var 'version=1.0.1' aws-ubuntu.pkr.hcl
+```
+
+### Passing a variable file
+```sh
+packer build -var-file=var.pkr.hcl aws-ubuntu.pkr.hcl
+```
