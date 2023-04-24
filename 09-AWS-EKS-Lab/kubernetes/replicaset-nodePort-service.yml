@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+   name: rs-nodeport-service
+spec:
+   type: NodePort
+   selector:
+      matchLabels:
+          app: myapp
+   ports:
+     - name: http
+       port: 80
+       targetPort: 80
+       nodePort: 30001
