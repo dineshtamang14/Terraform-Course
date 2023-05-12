@@ -1,0 +1,4 @@
+bastion_ami: ami-02396cdd13e9a1257
+region: us-east-1
+MYIP: 0.0.0.0/0
+state: present
