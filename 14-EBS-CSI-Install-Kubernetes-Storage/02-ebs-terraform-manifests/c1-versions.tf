@@ -9,15 +9,23 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.62" # optional but recommanded
     }
+    helm {
+      source = "hashicorp/helm"
+      version = "~> 2.4"
+    }
   }
 
   # Adding Backend as s3 for Remote State Storage
   backend "s3" {
     bucket = "terraform-ekscluster-state"
-    key    = "dev/eks-irsa/terraform.tfstate"
+    key    = "dev/eks-cluster/terraform.tfstate"
     region = "us-east-1"
 
     # For State Locking
     dynamodb_table = "dev-eks-irsa"
   }
+}
+
+provider "aws" {
+  region = var.aws_region
 }

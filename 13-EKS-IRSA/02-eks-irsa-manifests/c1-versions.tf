@@ -21,3 +21,7 @@ terraform {
     dynamodb_table = "dev-eks-irsa"
   }
 }
+
+provider "aws" {
+  region = var.aws_region
+}
