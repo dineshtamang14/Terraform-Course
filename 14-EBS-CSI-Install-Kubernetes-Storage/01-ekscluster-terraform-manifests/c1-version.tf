@@ -13,7 +13,7 @@ terraform {
 
   # Adding Backend as s3 for Remote State Storage
   backend "s3" {
-    bucket = "terraform-ekscluster-state"
+    bucket = "terraform-ekscluster-states"
     key    = "dev/eks-cluster/terraform.tfstate"
     region = "us-east-1"
 
