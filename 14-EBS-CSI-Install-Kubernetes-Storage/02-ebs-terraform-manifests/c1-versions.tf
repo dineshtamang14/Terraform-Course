@@ -9,9 +9,13 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.62" # optional but recommanded
     }
-    helm {
-      source = "hashicorp/helm"
-      version = "~> 2.4"
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.9"
+    }
+    http = {
+      source  = "hashicorp/http"
+      version = "~> 3.3"
     }
   }
 
