@@ -26,7 +26,7 @@ terraform {
     region = "us-east-1"
 
     # For State Locking
-    dynamodb_table = "dev-eks-irsa"
+    dynamodb_table = "dev-ebs-storage"
   }
 }
 
