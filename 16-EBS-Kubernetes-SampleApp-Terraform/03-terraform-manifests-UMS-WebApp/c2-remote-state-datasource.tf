@@ -4,6 +4,6 @@ data "terraform_remote_state" "eks" {
   config = {
     bucket = "terraform-ekscluster-states"
     key    = "dev/eks-cluster/terraform.tfstate"
-    region = "us-east-1" 
+    region = "us-east-1"
   }
 }

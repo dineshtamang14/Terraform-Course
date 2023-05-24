@@ -2,7 +2,7 @@
 provider "aws" {
   region  = "us-east-1"
   profile = "default"
-}   
+}
 
 # Datasource: EKS Cluster
 data "aws_eks_cluster" "cluster" {
