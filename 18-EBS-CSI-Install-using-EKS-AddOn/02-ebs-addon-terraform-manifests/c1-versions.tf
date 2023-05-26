@@ -9,26 +9,27 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.62" # optional but recommanded
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.9"
+    }
+    http = {
+      source  = "hashicorp/http"
+      version = "~> 3.3"
+    }
   }
 
   # Adding Backend as s3 for Remote State Storage
   backend "s3" {
     bucket = "terraform-ekscluster-states"
-    key    = "dev/eks-cluster/terraform.tfstate"
+    key    = "dev/ebs-storage/terraform.tfstate"
     region = "us-east-1"
 
     # For State Locking
-    dynamodb_table = "dev-ekscluster"
+    dynamodb_table = "dev-ebs-storage"
   }
 }
 
-# provider block
 provider "aws" {
-  region  = var.aws_region
-  profile = "default"
+  region = var.aws_region
 }
-
-/*
-Note-1: AWS Credentials Profile (profile="default") configured on
-$HOME/.aws/credentials
-*/
