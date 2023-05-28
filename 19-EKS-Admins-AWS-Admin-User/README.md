@@ -14,7 +14,7 @@
 aws sts get-caller-identity
 
 # Sample Output
-Kalyans-MacBook-Pro:01-ekscluster-terraform-manifests kdaida$ aws sts get-caller-identity
+$ aws sts get-caller-identity
 {
     "UserId": "AIDASUF7HC7SSJRDGMFBM",
     "Account": "180789647333",
@@ -22,7 +22,7 @@ Kalyans-MacBook-Pro:01-ekscluster-terraform-manifests kdaida$ aws sts get-caller
 }
 
 # Make a note of  EKS Cluster Creator user
-EKS_Cluster_Create_User: kalyandev (in my environment this is the user)
+EKS_Cluster_Create_User: dineshtamang14 (in my environment this is the user)
 ```
 
 ## Step-03: Pre-requisite: Create EKS Cluster
@@ -95,7 +95,7 @@ Default output format: json
 
 # Get current user configured in AWS CLI
 aws sts get-caller-identity
-Observation: Should see the user "kalyandev" (EKS_Cluster_Create_User) from default profile
+Observation: Should see the user "dineshtamang14" (EKS_Cluster_Create_User) from default profile
 ```
 
 ## Step-05: Configure kubeconfig and access EKS resources using kubectl
@@ -121,9 +121,9 @@ Observation:
 1. We should fail in accessing the EKS Cluster resources using kubectl
 
 ## Sample Output
-Kalyans-Mac-mini:01-ekscluster-terraform-manifests kalyanreddy$ kubectl get nodes
+$ kubectl get nodes
 error: You must be logged in to the server (Unauthorized)
-Kalyans-Mac-mini:01-ekscluster-terraform-manifests kalyanreddy$ 
+$ 
 ```
 
 ## Step-06: Access EKS Cluster resources using AWS Mgmt Console
